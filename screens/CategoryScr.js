@@ -1,20 +1,50 @@
 import React from "react";
-import { View, StyleSheet, Text, Button, Platform  } from "react-native";
-import { CATEGORIES } from "../data/dummy-data";
+import {
+  View,
+  StyleSheet,
+  Text,
+  Button,
+  Platform,
+  FlatList,
+} from "react-native";
+import { CATEGORIES, MEALS } from "../data/data";
 import Colors from "../Colors";
+import MealItem from "../components/MealItem";
 
 const CategoryScr = (props) => {
+  const renderMeals = (meal) => {
+    return (
+      <MealItem
+        title={meal.item.title}
+        selectMeal={() => {
+          props.navigation.navigate({routeName:'MealDetails', params:{
+            mealID:meal.item.id
+          }});
+        }}
+        duration={meal.item.duration}
+        complexity={meal.item.complexity}
+        affordability={meal.item.affordability}
+        image={meal.item.imageUrl}
+      ></MealItem>
+    );
+  };
+
   const objId = props.navigation.getParam("categoryId");
   const particulatObj = CATEGORIES.find((cat) => cat.id === objId);
 
+  const displayMeals = MEALS.filter(
+    (meal) => meal.categoryIds.indexOf(objId) >= 0
+  );
+
   return (
     <View style={styles.screen}>
-      <Text>Category screen here!</Text>
-      <Text>{particulatObj.name}</Text>
-      <Button
-        title="Meal Details"
-        onPress={() => props.navigation.navigate({ routeName: "MealDetails" })}
-      />
+
+      <FlatList
+        data={displayMeals}
+        renderItem={renderMeals}
+        style={{ width: "100%" }}
+      ></FlatList>
+      
     </View>
   );
 };
@@ -37,6 +67,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    margin:10
   },
 });
 

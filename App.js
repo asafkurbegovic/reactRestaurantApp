@@ -2,14 +2,14 @@ import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-import * as Fonts from "expo-font";
+import * as Font from "expo-font";
 import { AppLoading } from "expo";
 
 import Navigation from './navigation/Navigation'
 
 
 const getFonts = () => {
-  return Fonts.loadAsync({
+  return Font.loadAsync({
     "open-sens": require("./assets/fonts/OpenSans-Regular.ttf"),
     "open-sens-bold": require("./assets/fonts/OpenSans-Bold.ttf"),
   });

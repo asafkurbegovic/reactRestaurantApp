@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-import { CATEGORIES } from "../data/dummy-data";
+import { CATEGORIES } from "../data/data";
 import Colors from "../Colors";
 
 const CategoriesScr = (props) => {
