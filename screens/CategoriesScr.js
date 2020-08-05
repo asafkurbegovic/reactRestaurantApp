@@ -10,6 +10,8 @@ import {
 
 import { CATEGORIES } from "../data/data";
 import Colors from "../Colors";
+import { Item, HeaderButtons } from "react-navigation-header-buttons";
+import Header from '../components/Header'
 
 const CategoriesScr = (props) => {
   const categoryLoop = (itmes) => {
@@ -17,9 +19,12 @@ const CategoriesScr = (props) => {
       <TouchableOpacity
         style={styles.grid}
         onPress={() => {
-          props.navigation.navigate({routeName:"Category", params:{
-            categoryId: itmes.item.id
-          }});
+          props.navigation.navigate({
+            routeName: "Category",
+            params: {
+              categoryId: itmes.item.id,
+            },
+          });
         }}
       >
         <View>
@@ -34,12 +39,17 @@ const CategoriesScr = (props) => {
   );
 };
 
-CategoriesScr.navigationOptions ={
+CategoriesScr.navigationOptions = (data) => {
+  return {
     
-    
-    
-    screen:CategoriesScr
-}
+    headerLeft: ()=><HeaderButtons HeaderButtonComponent={Header}>
+        <Item title="Menu" iconName="ios-menu" 
+        onPress={()=>{data.navigation.toggleDrawer()}}/>
+      </HeaderButtons>
+      
+    ,
+  };
+};
 
 const styles = StyleSheet.create({
   screen: {
